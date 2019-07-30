@@ -13,7 +13,63 @@ public class Session {
     private static String nip;
     private static String nama_pegawai;
     private static String pekerjaan;
+    private static String no_resep;
+    private static String no_pasien;
+    private static String kode_catatan;
+    private static String catatan;
+    private static String kode_obat;
+    private static String kode_tindakan;
 
+    public static String getKode_obat() {
+        return kode_obat;
+    }
+
+    public static void setKode_obat(String kode_obat) {
+        Session.kode_obat = kode_obat;
+    }
+
+    public static String getKode_tindakan() {
+        return kode_tindakan;
+    }
+
+    public static void setKode_tindakan(String kode_tindakan) {
+        Session.kode_tindakan = kode_tindakan;
+    }
+    
+
+    public static String getCatatan() {
+        return catatan;
+    }
+
+    public static void setCatatan(String catatan) {
+        Session.catatan = catatan;
+    }
+
+    public static String getKode_catatan() {
+        return kode_catatan;
+    }
+
+    public static void setKode_catatan(String kode_catatan) {
+        Session.kode_catatan = kode_catatan;
+    }
+    
+
+    public static String getNo_pasien() {
+        return no_pasien;
+    }
+
+    public static void setNo_pasien(String no_pasien) {
+        Session.no_pasien = no_pasien;
+    }
+
+    public static String getNo_resep() {
+        return no_resep;
+    }
+
+    public static void setNo_resep(String no_resep) {
+        Session.no_resep = no_resep;
+    }
+    
     public static String getNip() {
         return nip;
     }

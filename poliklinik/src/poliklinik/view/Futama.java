@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.util.Date;  
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;
+import java.util.Random;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Gamal Robby
@@ -95,11 +97,63 @@ public class Futama extends javax.swing.JFrame {
         cMedik.setData(db.tampil_semua_catatanmedik());
         tblCatatanMedik.setModel(cMedik);
     }
+    
+    public void tampildata_pilihobat()
+    {
+        Database db = new Database();
+        TablePilihObat tObat = new TablePilihObat();
+        tObat.setData(db.tampil_semua_pilihobat());
+        tblPilihObat.setModel(tObat);
+    }
+    
+    public void tampildata_pilihtindakan()
+    {
+        Database db = new Database();
+        TablePilihTindakan tTindakan = new TablePilihTindakan();
+        tTindakan.setData(db.tampil_semua_pilihtindakan());
+        tblPilihTindakan.setModel(tTindakan);
+    }
+    
+    public void tampildata_detail_obat()
+    {
+        Database db = new Database();
+        TableDetailObat tDetailObat = new TableDetailObat();
+        tDetailObat.setData(db.tampil_semua_detail_obat());
+        tblDetailObat.setModel(tDetailObat);
+    }
+    
+    public void random_no_resep(){
+        Random angkaRandom = new Random(); 
+        int hasil;
+        char hasil2 = 0;
+        String tampil = "";
+        hasil = 1 + angkaRandom.nextInt(999999);
+        for (int x = 1; x <= 4; x++) {
+             hasil2 = (char) ('A' + Math.random() * ('Z' - 'A' + 1));
+             tampil +=hasil2; 
+        }
+        txtNoresep.setText(tampil+String.valueOf(hasil));
+    }
+    
+    public void random_kode_catatan(){
+        Session ses = new Session();
+        Random angkaRandom = new Random(); 
+        int hasil;
+        hasil = 1 + angkaRandom.nextInt(99999);
+        int hasil2;
+        hasil2 = 1 + angkaRandom.nextInt(99999);
+        String tampil=(String.valueOf(hasil)+String.valueOf(hasil2));
+        ses.setKode_catatan(tampil);
+    }
+    
     public Futama() {
         initComponents();
         validasilogin();
         lblTgl.setText("TGL : "+getTanggal());
         tampildata_catatanmedik();
+        random_no_resep();
+        tampildata_pilihobat();
+        tampildata_pilihtindakan();
     }
 
     /**
@@ -148,7 +202,7 @@ public class Futama extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         pnlPenanganan = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnTambahObatTindakan = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -156,19 +210,19 @@ public class Futama extends javax.swing.JFrame {
         jTable9 = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnCetak = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtNoPasien = new javax.swing.JTextField();
+        txtNoresep = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnPilihPasien = new javax.swing.JButton();
+        btnBatalPasien = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        txtAreaTambahCatatan = new javax.swing.JTextArea();
+        btnSimpanCatatan = new javax.swing.JButton();
+        btnUbahCatatan = new javax.swing.JButton();
         pnlPasien = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         pnlPegawai = new javax.swing.JPanel();
@@ -180,26 +234,30 @@ public class Futama extends javax.swing.JFrame {
         pnlPilihObat = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tblPilihTindakan = new javax.swing.JTable();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        tblPilihObat = new javax.swing.JTable();
+        txtCariPilihTindakan = new javax.swing.JTextField();
+        txtCariPilihObat = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        btnPilihObat = new javax.swing.JButton();
+        btnPilihTindakan = new javax.swing.JButton();
+        btnCariPilihTindakan = new javax.swing.JButton();
+        btnCariPilihObat = new javax.swing.JButton();
+        btnRefreshPiihObat = new javax.swing.JButton();
+        btnRefreshPiihTindakan = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
-        jTextField8 = new javax.swing.JTextField();
+        tblDetailObat = new javax.swing.JTable();
+        txtDetailObatJumlah = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtDetailObatAturan = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        btnSimpanDetailObat = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        txtDetailObatNama = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -449,17 +507,18 @@ public class Futama extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Obat / Tindakan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setBackground(new java.awt.Color(13, 206, 112));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Tambah Obat/Tindakan");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusPainted(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnTambahObatTindakan.setBackground(new java.awt.Color(13, 206, 112));
+        btnTambahObatTindakan.setForeground(new java.awt.Color(255, 255, 255));
+        btnTambahObatTindakan.setText("Tambah Obat/Tindakan");
+        btnTambahObatTindakan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTambahObatTindakan.setEnabled(false);
+        btnTambahObatTindakan.setFocusPainted(false);
+        btnTambahObatTindakan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnTambahObatTindakanActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 70));
+        jPanel2.add(btnTambahObatTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 70));
 
         pnlPenanganan.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 270, 280));
 
@@ -502,19 +561,22 @@ public class Futama extends javax.swing.JFrame {
         jLabel25.setText("NO RESEP");
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jButton5.setBackground(new java.awt.Color(13, 206, 112));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Cetak");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusPainted(false);
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
+        btnCetak.setBackground(new java.awt.Color(13, 206, 112));
+        btnCetak.setForeground(new java.awt.Color(255, 255, 255));
+        btnCetak.setText("Cetak");
+        btnCetak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCetak.setEnabled(false);
+        btnCetak.setFocusPainted(false);
+        jPanel3.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         pnlPenanganan.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 910, 260));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Masukkan Nomor Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 180, 30));
-        jPanel4.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 180, 30));
+        jPanel4.add(txtNoPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 180, 30));
+
+        txtNoresep.setEditable(false);
+        jPanel4.add(txtNoresep, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 180, 30));
 
         jLabel14.setFont(new java.awt.Font("Clarendon BT", 0, 12)); // NOI18N
         jLabel14.setText("No Pasien");
@@ -524,44 +586,64 @@ public class Futama extends javax.swing.JFrame {
         jLabel15.setText("No Resep");
         jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(13, 206, 112));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Pilih");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 60, -1));
+        btnPilihPasien.setBackground(new java.awt.Color(13, 206, 112));
+        btnPilihPasien.setForeground(new java.awt.Color(255, 255, 255));
+        btnPilihPasien.setText("Pilih");
+        btnPilihPasien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPilihPasien.setFocusPainted(false);
+        btnPilihPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPilihPasienActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnPilihPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 60, -1));
 
-        jButton4.setBackground(new java.awt.Color(13, 206, 112));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Batal");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusPainted(false);
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        btnBatalPasien.setBackground(new java.awt.Color(13, 206, 112));
+        btnBatalPasien.setForeground(new java.awt.Color(255, 255, 255));
+        btnBatalPasien.setText("Batal");
+        btnBatalPasien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBatalPasien.setEnabled(false);
+        btnBatalPasien.setFocusPainted(false);
+        btnBatalPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalPasienActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnBatalPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         pnlPenanganan.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 310, 280));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Catatan Medik", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
+        txtAreaTambahCatatan.setEditable(false);
+        txtAreaTambahCatatan.setColumns(20);
+        txtAreaTambahCatatan.setLineWrap(true);
+        txtAreaTambahCatatan.setRows(5);
+        jScrollPane4.setViewportView(txtAreaTambahCatatan);
 
         jPanel6.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 250, 170));
 
-        jButton2.setBackground(new java.awt.Color(13, 206, 112));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Simpan");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        btnSimpanCatatan.setBackground(new java.awt.Color(13, 206, 112));
+        btnSimpanCatatan.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpanCatatan.setText("Simpan");
+        btnSimpanCatatan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSimpanCatatan.setEnabled(false);
+        btnSimpanCatatan.setFocusPainted(false);
+        btnSimpanCatatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanCatatanActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnSimpanCatatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
 
-        jButton15.setBackground(new java.awt.Color(13, 206, 112));
-        jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Ubah");
-        jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton15.setFocusPainted(false);
-        jPanel6.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 70, -1));
+        btnUbahCatatan.setBackground(new java.awt.Color(13, 206, 112));
+        btnUbahCatatan.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbahCatatan.setText("Ubah");
+        btnUbahCatatan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUbahCatatan.setEnabled(false);
+        btnUbahCatatan.setFocusPainted(false);
+        jPanel6.add(btnUbahCatatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 70, -1));
 
         pnlPenanganan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 290, 280));
 
@@ -656,7 +738,7 @@ public class Futama extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pilih Obat/ Tindakan Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tblPilihTindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -667,11 +749,11 @@ public class Futama extends javax.swing.JFrame {
                 "Tindakan"
             }
         ));
-        jScrollPane7.setViewportView(jTable6);
+        jScrollPane7.setViewportView(tblPilihTindakan);
 
         jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 340, 130));
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        tblPilihObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -682,11 +764,11 @@ public class Futama extends javax.swing.JFrame {
                 "Obat"
             }
         ));
-        jScrollPane8.setViewportView(jTable7);
+        jScrollPane8.setViewportView(tblPilihObat);
 
         jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 320, 130));
-        jPanel5.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 180, 30));
-        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 180, 30));
+        jPanel5.add(txtCariPilihTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 180, 30));
+        jPanel5.add(txtCariPilihObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Clarendon BT", 0, 12)); // NOI18N
         jLabel16.setText("Cari Obat");
@@ -696,70 +778,117 @@ public class Futama extends javax.swing.JFrame {
         jLabel17.setText("Cari Tindakan");
         jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
-        jButton6.setBackground(new java.awt.Color(13, 206, 112));
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Pilih Obat");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setFocusPainted(false);
-        jPanel5.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 100, -1));
+        btnPilihObat.setBackground(new java.awt.Color(13, 206, 112));
+        btnPilihObat.setForeground(new java.awt.Color(255, 255, 255));
+        btnPilihObat.setText("Pilih Obat");
+        btnPilihObat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPilihObat.setFocusPainted(false);
+        btnPilihObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPilihObatActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnPilihObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 100, -1));
 
-        jButton7.setBackground(new java.awt.Color(13, 206, 112));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Pilih Tindakan");
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.setFocusPainted(false);
-        jPanel5.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+        btnPilihTindakan.setBackground(new java.awt.Color(13, 206, 112));
+        btnPilihTindakan.setForeground(new java.awt.Color(255, 255, 255));
+        btnPilihTindakan.setText("Pilih Tindakan");
+        btnPilihTindakan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPilihTindakan.setFocusPainted(false);
+        jPanel5.add(btnPilihTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
-        jButton10.setBackground(new java.awt.Color(13, 206, 112));
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Cari");
-        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton10.setFocusPainted(false);
-        jPanel5.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, 30));
+        btnCariPilihTindakan.setBackground(new java.awt.Color(13, 206, 112));
+        btnCariPilihTindakan.setForeground(new java.awt.Color(255, 255, 255));
+        btnCariPilihTindakan.setText("Cari");
+        btnCariPilihTindakan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCariPilihTindakan.setFocusPainted(false);
+        btnCariPilihTindakan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariPilihTindakanActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCariPilihTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, 30));
 
-        jButton11.setBackground(new java.awt.Color(13, 206, 112));
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Cari");
-        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton11.setFocusPainted(false);
-        jPanel5.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, 30));
+        btnCariPilihObat.setBackground(new java.awt.Color(13, 206, 112));
+        btnCariPilihObat.setForeground(new java.awt.Color(255, 255, 255));
+        btnCariPilihObat.setText("Cari");
+        btnCariPilihObat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCariPilihObat.setFocusPainted(false);
+        btnCariPilihObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariPilihObatActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnCariPilihObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, 30));
+
+        btnRefreshPiihObat.setBackground(new java.awt.Color(13, 206, 112));
+        btnRefreshPiihObat.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshPiihObat.setText("Refresh");
+        btnRefreshPiihObat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefreshPiihObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshPiihObatActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnRefreshPiihObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 90, -1));
+
+        btnRefreshPiihTindakan.setBackground(new java.awt.Color(13, 206, 112));
+        btnRefreshPiihTindakan.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshPiihTindakan.setText("Refresh");
+        btnRefreshPiihTindakan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefreshPiihTindakan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshPiihTindakanActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnRefreshPiihTindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 90, -1));
 
         pnlPilihObat.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 720, 260));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Aturan Pakai / Hapus Obat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetailObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Obat", "Jumlah Obat", "Aturan Pakai"
+                "No Resep", "Kode Obat", "Nama Obat", "Jumlah", "Aturan Pakai"
             }
         ));
-        jScrollPane9.setViewportView(jTable8);
+        tblDetailObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDetailObatMousePressed(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tblDetailObat);
 
         jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 550, 210));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 100, 30));
+        jPanel1.add(txtDetailObatJumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, 100, 30));
 
         jLabel18.setFont(new java.awt.Font("Clarendon BT", 0, 12)); // NOI18N
         jLabel18.setText("Jumlah Obat");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, -1));
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 220, 30));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        jPanel1.add(txtDetailObatAturan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 220, 30));
 
         jLabel19.setFont(new java.awt.Font("Clarendon BT", 0, 12)); // NOI18N
         jLabel19.setText("Aturan Pakai");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, -1, -1));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
 
-        jButton8.setBackground(new java.awt.Color(13, 206, 112));
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Simpan");
-        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton8.setFocusPainted(false);
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, 80, 30));
+        btnSimpanDetailObat.setBackground(new java.awt.Color(13, 206, 112));
+        btnSimpanDetailObat.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpanDetailObat.setText("Simpan");
+        btnSimpanDetailObat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSimpanDetailObat.setFocusPainted(false);
+        btnSimpanDetailObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanDetailObatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSimpanDetailObat, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, 80, 30));
 
         jButton12.setBackground(new java.awt.Color(13, 206, 112));
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
@@ -767,6 +896,13 @@ public class Futama extends javax.swing.JFrame {
         jButton12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton12.setFocusPainted(false);
         jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 183, 80, 30));
+
+        txtDetailObatNama.setEditable(false);
+        jPanel1.add(txtDetailObatNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 220, 30));
+
+        jLabel27.setFont(new java.awt.Font("Clarendon BT", 0, 12)); // NOI18N
+        jLabel27.setText("Nama Obat");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, -1));
 
         pnlPilihObat.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 340, 970, 270));
 
@@ -912,7 +1048,7 @@ public class Futama extends javax.swing.JFrame {
         bgDinamic.revalidate();
     }//GEN-LAST:event_btnObatMousePressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnTambahObatTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahObatTindakanActionPerformed
         // TODO add your handling code here:
         bgDinamic.removeAll();
         bgDinamic.repaint();
@@ -921,7 +1057,7 @@ public class Futama extends javax.swing.JFrame {
         bgDinamic.add(pnlPilihObat);
         bgDinamic.repaint();
         bgDinamic.revalidate();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnTambahObatTindakanActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -945,12 +1081,12 @@ public class Futama extends javax.swing.JFrame {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
         Database db = new Database();
-        TableCatatanMedik tabelMahasiswa = new TableCatatanMedik();
+        TableCatatanMedik tabelCmedik = new TableCatatanMedik();
         String katakunci=txtSearchCmedik.getText();
         if (katakunci!=null){
-            tabelMahasiswa.setData(db.cari_catatanmedik(katakunci));
-            tabelMahasiswa.fireTableDataChanged();
-            tblCatatanMedik.setModel(tabelMahasiswa);
+            tabelCmedik.setData(db.cari_catatanmedik(katakunci));
+            tabelCmedik.fireTableDataChanged();
+            tblCatatanMedik.setModel(tabelCmedik);
         }
         txtSearchCmedik.setText("");
     }//GEN-LAST:event_jButton14ActionPerformed
@@ -959,6 +1095,125 @@ public class Futama extends javax.swing.JFrame {
         // TODO add your handling code here:
         tampildata_catatanmedik();
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void btnPilihPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihPasienActionPerformed
+        // TODO add your handling code here:
+        Session ses = new Session();
+        Database db = new Database();
+        ses.setNo_resep(txtNoresep.getText());
+        db.tambah_resep(new resep(txtNoresep.getText(),ses.getNip(),txtNoPasien.getText().toUpperCase()));
+        btnPilihPasien.setEnabled(false);
+        btnBatalPasien.setEnabled(true);
+        txtNoPasien.setEditable(false);
+        txtAreaTambahCatatan.setEditable(true);
+        btnSimpanCatatan.setEnabled(true);
+        btnUbahCatatan.setEnabled(true);
+        btnTambahObatTindakan.setEnabled(true);
+        btnCetak.setEnabled(true);
+    }//GEN-LAST:event_btnPilihPasienActionPerformed
+
+    private void btnBatalPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalPasienActionPerformed
+        // TODO add your handling code here:
+        Database db = new Database();
+        db.hapus_resep(txtNoresep.getText().toUpperCase());
+        btnPilihPasien.setEnabled(true);
+        btnBatalPasien.setEnabled(false);
+        txtNoPasien.setEditable(true);
+        txtAreaTambahCatatan.setEditable(false);
+        btnSimpanCatatan.setEnabled(false);
+        btnUbahCatatan.setEnabled(false);
+        btnTambahObatTindakan.setEnabled(false);
+        btnCetak.setEnabled(false);
+    }//GEN-LAST:event_btnBatalPasienActionPerformed
+
+    private void btnSimpanCatatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanCatatanActionPerformed
+        // TODO add your handling code here:
+        random_kode_catatan();
+        Session ses = new Session();
+        ses.setCatatan(txtAreaTambahCatatan.getText());
+        Database db = new Database();
+        db.tambah_catatan();
+    }//GEN-LAST:event_btnSimpanCatatanActionPerformed
+
+    private void btnCariPilihObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPilihObatActionPerformed
+        // TODO add your handling code here:
+        Database db = new Database();
+        TablePilihObat tblcariPilihObat = new TablePilihObat();
+        String katakunci=txtCariPilihObat.getText();
+        if (katakunci!=null){
+            tblcariPilihObat.setData(db.cari_PilihObat(katakunci));
+            tblcariPilihObat.fireTableDataChanged();
+            tblPilihObat.setModel(tblcariPilihObat);
+        }
+        txtCariPilihObat.setText("");
+    }//GEN-LAST:event_btnCariPilihObatActionPerformed
+
+    private void btnRefreshPiihObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPiihObatActionPerformed
+        // TODO add your handling code here:
+        tampildata_pilihobat();
+    }//GEN-LAST:event_btnRefreshPiihObatActionPerformed
+
+    private void btnCariPilihTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPilihTindakanActionPerformed
+        // TODO add your handling code here:
+        Database db = new Database();
+        TablePilihTindakan tblcariPilihTindakan = new TablePilihTindakan();
+        String katakunci=txtCariPilihTindakan.getText();
+        if (katakunci!=null){
+            tblcariPilihTindakan.setData(db.cari_PilihTindakan(katakunci));
+            tblcariPilihTindakan.fireTableDataChanged();
+            tblPilihTindakan.setModel(tblcariPilihTindakan);
+        }
+        txtCariPilihTindakan.setText("");
+    }//GEN-LAST:event_btnCariPilihTindakanActionPerformed
+
+    private void btnRefreshPiihTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPiihTindakanActionPerformed
+        // TODO add your handling code here:
+        tampildata_pilihtindakan();
+    }//GEN-LAST:event_btnRefreshPiihTindakanActionPerformed
+
+    private void btnPilihObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihObatActionPerformed
+        // TODO add your handling code here:
+        try {
+            Database db = new Database();
+            Session ses = new Session();
+            int baris = tblPilihObat.getSelectedRow();
+            String kode_obat = (String)tblPilihObat.getValueAt(baris, 0);
+            ses.setKode_obat(kode_obat);
+            db.tambah_detail_obat();
+            tampildata_detail_obat();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Pilih Obat Yang Dibutuhkan");
+        }
+    }//GEN-LAST:event_btnPilihObatActionPerformed
+
+    private void tblDetailObatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailObatMousePressed
+        // TODO add your handling code here:
+        int i = tblDetailObat.getSelectedRow();
+        if (i>-1){
+            txtDetailObatNama.setText(tblDetailObat.getValueAt(i, 2).toString());
+        }
+        
+    }//GEN-LAST:event_tblDetailObatMousePressed
+
+    private void btnSimpanDetailObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanDetailObatActionPerformed
+        // TODO add your handling code here:
+        Database db = new Database();
+        int i = tblDetailObat.getSelectedRow();
+        int harga = 0;
+        int jumlah;
+        int total;
+        String kode_obat = null;
+        String aturan;
+        if (i>-1){
+            kode_obat=tblDetailObat.getValueAt(i, 1).toString();
+            harga=Integer.valueOf(tblDetailObat.getValueAt(i, 4).toString());
+        }
+        jumlah=Integer.valueOf(txtDetailObatJumlah.getText());
+        aturan=txtDetailObatAturan.getText();
+        total = harga*jumlah;
+        db.update_detail_obat(kode_obat,jumlah, aturan, total);
+        tampildata_detail_obat();
+    }//GEN-LAST:event_btnSimpanDetailObatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -998,28 +1253,30 @@ public class Futama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgDinamic;
+    private javax.swing.JButton btnBatalPasien;
     private javax.swing.JPanel btnCMedik;
+    private javax.swing.JButton btnCariPilihObat;
+    private javax.swing.JButton btnCariPilihTindakan;
+    private javax.swing.JButton btnCetak;
     private javax.swing.JPanel btnLogout;
     private javax.swing.JPanel btnObat;
     private javax.swing.JPanel btnPasien;
     private javax.swing.JPanel btnPegawai;
     private javax.swing.JPanel btnPembayaran;
     private javax.swing.JPanel btnPenanganan;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
+    private javax.swing.JButton btnPilihObat;
+    private javax.swing.JButton btnPilihPasien;
+    private javax.swing.JButton btnPilihTindakan;
+    private javax.swing.JButton btnRefreshPiihObat;
+    private javax.swing.JButton btnRefreshPiihTindakan;
+    private javax.swing.JButton btnSimpanCatatan;
+    private javax.swing.JButton btnSimpanDetailObat;
+    private javax.swing.JButton btnTambahObatTindakan;
+    private javax.swing.JButton btnUbahCatatan;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1040,6 +1297,7 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1065,17 +1323,7 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblTgl;
     private javax.swing.JPanel pnlCMedik;
@@ -1090,6 +1338,17 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTop;
     private javax.swing.JTextArea tampilCatatanMedik;
     private javax.swing.JTable tblCatatanMedik;
+    private javax.swing.JTable tblDetailObat;
+    private javax.swing.JTable tblPilihObat;
+    private javax.swing.JTable tblPilihTindakan;
+    private javax.swing.JTextArea txtAreaTambahCatatan;
+    private javax.swing.JTextField txtCariPilihObat;
+    private javax.swing.JTextField txtCariPilihTindakan;
+    private javax.swing.JTextField txtDetailObatAturan;
+    private javax.swing.JTextField txtDetailObatJumlah;
+    private javax.swing.JTextField txtDetailObatNama;
+    private javax.swing.JTextField txtNoPasien;
+    private javax.swing.JTextField txtNoresep;
     private javax.swing.JTextField txtSearchCmedik;
     // End of variables declaration//GEN-END:variables
 }
