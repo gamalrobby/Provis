@@ -9,17 +9,25 @@ package poliklinik.view;
  *
  * @author Gamal Robby
  */
-class tindakan {
-    private String kode_tindakan;
+public class detailPembayaranTindakan {
+     private String kode_tindakan;
     private String nama_tindakan;
-    private String harga_tindakan;
+    private String harga;
 
-    public tindakan(String kode_tindakan, String nama_tindakan, String harga_tindakan) {
+    public detailPembayaranTindakan(String kode_tindakan, String nama_tindakan, String harga) {
         this.kode_tindakan = kode_tindakan;
         this.nama_tindakan = nama_tindakan;
-        this.harga_tindakan = harga_tindakan;
+        this.harga = harga;
     }
-    
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
+    }
+
     public String getKode_tindakan() {
         return kode_tindakan;
     }
@@ -35,14 +43,4 @@ class tindakan {
     public void setNama_tindakan(String nama_tindakan) {
         this.nama_tindakan = nama_tindakan;
     }
-
-    public String getHarga_tindakan() {
-        return harga_tindakan;
-    }
-
-    public void setHarga_tindakan(String harga_tindakan) {
-        this.harga_tindakan = harga_tindakan;
-    }
-    
-    
 }

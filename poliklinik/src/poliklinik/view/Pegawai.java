@@ -9,7 +9,7 @@ package poliklinik.view;
  *
  * @author Gamal Robby
  */
-class Pegawai {
+class pegawai {
     private String nip;
     private String kode_spesialis;
     private String username;
@@ -92,7 +92,7 @@ class Pegawai {
         this.no_telp_pegawai = no_telp_pegawai;
     }
     
-    public Pegawai(String nip,String kd_spesialis,String username, String password, String nama, String pekerjaan, String tgl_lahir,String alamat,String no_telp){
+    public pegawai(String nip,String kd_spesialis,String username, String password, String nama, String pekerjaan, String tgl_lahir,String alamat,String no_telp){
         setNip(nip);
         setKode_spesialis(kd_spesialis);
         setUsername(username);

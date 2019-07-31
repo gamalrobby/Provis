@@ -12,11 +12,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Gamal Robby
  */
-public class TableCatatanMedik extends AbstractTableModel{
-    private ArrayList<Catatanmedik> data;
+public class tableCatatanMedik extends AbstractTableModel{
+    private ArrayList<catatanMedik> data;
     private String[] namaField = {"No Pasien","Nama Pasien","Nama Dokter","No Resep","Tgl Catatan","Catatan Medik"};
     
-    public void setData(ArrayList<Catatanmedik> dt)
+    public void setData(ArrayList<catatanMedik> dt)
     {
         this.data = dt;
     }
@@ -33,7 +33,7 @@ public class TableCatatanMedik extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int baris, int kolom) {
-        Catatanmedik m = data.get(baris);
+        catatanMedik m = data.get(baris);
         switch(kolom)
         {
             case 0 : return m.getNo_pasien();

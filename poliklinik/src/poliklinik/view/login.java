@@ -36,7 +36,7 @@ public class login extends javax.swing.JFrame {
             setIconImage(i);
             pnlBg.setBackground(new Color(250,250,250,100));
             pnlBgLogin.setBackground(new Color(250,250,250,210));
-            Database DB = new Database();
+            database DB = new database();
             DB.config();
             con = DB.con;
             stat = DB.stm;
@@ -150,7 +150,7 @@ public class login extends javax.swing.JFrame {
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
         // TODO add your handling code here:
         
-        Session ses = new Session();
+        session ses = new session();
         try {
             sql = "SELECT * FROM pegawai WHERE username='"+txtUsername.getText()+"' AND password='"+txtPassword.getText()+"'";
             rs = stat.executeQuery(sql);
@@ -160,7 +160,7 @@ public class login extends javax.swing.JFrame {
                     ses.setNama_pegawai(rs.getString("nama_pegawai"));
                     ses.setPekerjaan(rs.getString("pekerjaan"));
                     System.out.println(ses.getPekerjaan());
-                    Futama futama = new Futama();
+                    fUtama futama = new fUtama();
                     futama.setVisible(true);
                     this.setVisible(false);
                 }

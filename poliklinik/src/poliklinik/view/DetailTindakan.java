@@ -9,13 +9,23 @@ package poliklinik.view;
  *
  * @author Gamal Robby
  */
-class DetailTindakan {
+class detailTindakan {
     private String kode_tindakan;
     private String nama_tindakan;
+    private String harga;
 
-    public DetailTindakan(String kode_tindakan, String nama_tindakan) {
+    public detailTindakan(String kode_tindakan, String nama_tindakan, String harga) {
         this.kode_tindakan = kode_tindakan;
         this.nama_tindakan = nama_tindakan;
+        this.harga = harga;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
     }
 
     public String getKode_tindakan() {

@@ -9,7 +9,7 @@ package poliklinik.view;
  *
  * @author Gamal Robby
  */
-class Catatanmedik {
+class catatanMedik {
     private String no_pasien;
     private String nama_pasien;
     private String nama_pegawai;
@@ -17,7 +17,7 @@ class Catatanmedik {
     private String tgl_catatan;
     private String catatan_medik;
 
-    public Catatanmedik(String no_pasien, String nama_pasien, String nama_pegawai, String no_resep, String tgl_catatan, String catatan_medik) {
+    public catatanMedik(String no_pasien, String nama_pasien, String nama_pegawai, String no_resep, String tgl_catatan, String catatan_medik) {
         this.no_pasien = no_pasien;
         this.nama_pasien = nama_pasien;
         this.nama_pegawai = nama_pegawai;

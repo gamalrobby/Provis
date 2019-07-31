@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
  *
  * @author Gamal Robby
  */
-public class Futama extends javax.swing.JFrame {
+public class fUtama extends javax.swing.JFrame {
 
     /**
-     * Creates new form Futama
+     * Creates new form fUtama
      */
     public void validasilogin(){
-        Session ses = new Session();
+        session ses = new session();
         lblNama.setText(ses.getNama_pegawai());
         if(ses.getPekerjaan().equalsIgnoreCase("dokter")){
             btnCMedik.setVisible(true);
@@ -92,47 +92,49 @@ public class Futama extends javax.swing.JFrame {
     }  
     public void tampildata_catatanmedik()
     {
-        Database db = new Database();
-        TableCatatanMedik cMedik = new TableCatatanMedik();
+        database db = new database();
+        tableCatatanMedik cMedik = new tableCatatanMedik();
         cMedik.setData(db.tampil_semua_catatanmedik());
         tblCatatanMedik.setModel(cMedik);
     }
     
     public void tampildata_pilihobat()
     {
-        Database db = new Database();
-        TablePilihObat tObat = new TablePilihObat();
+        database db = new database();
+        tablePilihObat tObat = new tablePilihObat();
         tObat.setData(db.tampil_semua_pilihobat());
         tblPilihObat.setModel(tObat);
     }
     
     public void tampildata_pilihtindakan()
     {
-        Database db = new Database();
-        TablePilihTindakan tTindakan = new TablePilihTindakan();
+        database db = new database();
+        tablePilihTindakan tTindakan = new tablePilihTindakan();
         tTindakan.setData(db.tampil_semua_pilihtindakan());
         tblPilihTindakan.setModel(tTindakan);
     }
     
     public void tampildata_detail_obat()
     {
-        Database db = new Database();
-        TableDetailObat tDetailObat = new TableDetailObat();
+        database db = new database();
+        tableDetailObat tDetailObat = new tableDetailObat();
         tDetailObat.setData(db.tampil_semua_detail_obat());
         tblDetailObat.setModel(tDetailObat);
     }
     
+    
+    
     public void tampildata_detail_tindakan()
     {
-        Database db = new Database();
-        TableDetailTindakan tDetailTindakan = new TableDetailTindakan();
+        database db = new database();
+        tableDetailTindakan tDetailTindakan = new tableDetailTindakan();
         tDetailTindakan.setData(db.tampil_semua_detail_tindakan());
         tblDetailTindakan.setModel(tDetailTindakan);
     }
     
     public void tampildata_detail_resep_obat()
     {
-        Database db = new Database();
+        database db = new database();
         tableDetailResepTindakan tDetailTindakan = new tableDetailResepTindakan();
         tDetailTindakan.setData(db.tampil_semua_detail_tindakan());
         tblDetailResepTindakan.setModel(tDetailTindakan);
@@ -140,7 +142,7 @@ public class Futama extends javax.swing.JFrame {
     
     public void tampildata_detail_resep_tindakan()
     {
-        Database db = new Database();
+        database db = new database();
         tableDetailResepObat tDetailObat = new tableDetailResepObat();
         tDetailObat.setData(db.tampil_semua_detail_obat());
         tblDetailResepObat.setModel(tDetailObat);
@@ -160,7 +162,7 @@ public class Futama extends javax.swing.JFrame {
     }
     
     public void random_kode_catatan(){
-        Session ses = new Session();
+        session ses = new session();
         Random angkaRandom = new Random(); 
         int hasil;
         hasil = 1 + angkaRandom.nextInt(99999);
@@ -170,7 +172,7 @@ public class Futama extends javax.swing.JFrame {
         ses.setKode_catatan(tampil);
     }
     
-    public Futama() {
+    public fUtama() {
         initComponents();
         validasilogin();
         lblTgl.setText("TGL : "+getTanggal());
@@ -257,7 +259,31 @@ public class Futama extends javax.swing.JFrame {
         pnlPegawai = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         pnlPembayaran = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        txtCariNoresep = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        txtPembayaranNoResep = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
+        txtPembayaranNoPasien = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        txtPembayaranNamaPasien = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPembayaranObat = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblPembayaranTindakan = new javax.swing.JTable();
+        jLabel29 = new javax.swing.JLabel();
+        txtPembayaranTobat = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        txtPembayaranTtindakan = new javax.swing.JTextField();
+        txtPembayaranTpembayaran = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        txtPembayaranBayar = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        txtPembayaranKembalian = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         pnlObat = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         pnlPilihObat = new javax.swing.JPanel();
@@ -730,24 +756,89 @@ public class Futama extends javax.swing.JFrame {
 
         bgDinamic.add(pnlPegawai, "card5");
 
-        jLabel22.setText("pembayaran");
+        pnlPembayaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout pnlPembayaranLayout = new javax.swing.GroupLayout(pnlPembayaran);
-        pnlPembayaran.setLayout(pnlPembayaranLayout);
-        pnlPembayaranLayout.setHorizontalGroup(
-            pnlPembayaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPembayaranLayout.createSequentialGroup()
-                .addGap(297, 297, 297)
-                .addComponent(jLabel22)
-                .addContainerGap(653, Short.MAX_VALUE))
-        );
-        pnlPembayaranLayout.setVerticalGroup(
-            pnlPembayaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPembayaranLayout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(jLabel22)
-                .addContainerGap(329, Short.MAX_VALUE))
-        );
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pembayaran", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Clarendon BT", 0, 14))); // NOI18N
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.add(txtCariNoresep, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 175, 28));
+
+        jButton1.setText("Cari");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, 30));
+        jPanel8.add(txtPembayaranNoResep, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 180, 30));
+
+        jLabel22.setText("No Resep");
+        jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel8.add(txtPembayaranNoPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 180, 30));
+
+        jLabel24.setText("No Pasien");
+        jPanel8.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        jPanel8.add(txtPembayaranNamaPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 180, 30));
+
+        jLabel25.setText("Nama Pasien");
+        jPanel8.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        tblPembayaranObat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nama Obat", "Jumlah", "Aturan Pakai", "Sub Harga Obat"
+            }
+        ));
+        jScrollPane3.setViewportView(tblPembayaranObat);
+
+        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 130));
+
+        tblPembayaranTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Tindakan", "Harga"
+            }
+        ));
+        jScrollPane5.setViewportView(tblPembayaranTindakan);
+
+        jPanel8.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 410, 130));
+
+        jLabel29.setText("Total Harga Obat");
+        jPanel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        jPanel8.add(txtPembayaranTobat, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 180, 30));
+
+        jLabel30.setText("Total Harga Tindakan");
+        jPanel8.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
+        jPanel8.add(txtPembayaranTtindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 180, 30));
+        jPanel8.add(txtPembayaranTpembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 180, 30));
+
+        jLabel31.setText("Total Pembayaran");
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+
+        jLabel32.setText("Pembayaran");
+        jPanel8.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, -1));
+        jPanel8.add(txtPembayaranBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 180, 30));
+
+        jLabel33.setText("Kembalian");
+        jPanel8.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, -1, -1));
+        jPanel8.add(txtPembayaranKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 180, 30));
+
+        jButton2.setText("BAYAR");
+        jPanel8.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 110, 30));
+
+        jButton3.setText("CETAK");
+        jPanel8.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, 40));
+
+        pnlPembayaran.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 960, 470));
 
         bgDinamic.add(pnlPembayaran, "card6");
 
@@ -1138,8 +1229,8 @@ public class Futama extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
-        TableCatatanMedik tabelCmedik = new TableCatatanMedik();
+        database db = new database();
+        tableCatatanMedik tabelCmedik = new tableCatatanMedik();
         String katakunci=txtSearchCmedik.getText();
         if (katakunci!=null){
             tabelCmedik.setData(db.cari_catatanmedik(katakunci));
@@ -1156,8 +1247,8 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnPilihPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihPasienActionPerformed
         // TODO add your handling code here:
-        Session ses = new Session();
-        Database db = new Database();
+        session ses = new session();
+        database db = new database();
         ses.setNo_resep(txtNoresep.getText());
         db.tambah_resep(new resep(txtNoresep.getText(),ses.getNip(),txtNoPasien.getText().toUpperCase()));
         btnPilihPasien.setEnabled(false);
@@ -1178,9 +1269,9 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnBatalPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalPasienActionPerformed
         // TODO add your handling code here:
-        Session ses = new Session();
+        session ses = new session();
         ses.setNo_pasien(null);
-        Database db = new Database();
+        database db = new database();
         db.hapus_resep(txtNoresep.getText().toUpperCase());
         btnPilihPasien.setEnabled(true);
         btnBatalPasien.setEnabled(false);
@@ -1205,16 +1296,16 @@ public class Futama extends javax.swing.JFrame {
         btnUbahCatatan.setEnabled(true);
         btnSimpanCatatan.setEnabled(false);
         random_kode_catatan();
-        Session ses = new Session();
+        session ses = new session();
         ses.setCatatan(txtAreaTambahCatatan.getText());
-        Database db = new Database();
+        database db = new database();
         db.tambah_catatan();
     }//GEN-LAST:event_btnSimpanCatatanActionPerformed
 
     private void btnCariPilihObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPilihObatActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
-        TablePilihObat tblcariPilihObat = new TablePilihObat();
+        database db = new database();
+        tablePilihObat tblcariPilihObat = new tablePilihObat();
         String katakunci=txtCariPilihObat.getText();
         if (katakunci!=null){
             tblcariPilihObat.setData(db.cari_PilihObat(katakunci));
@@ -1231,8 +1322,8 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnCariPilihTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPilihTindakanActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
-        TablePilihTindakan tblcariPilihTindakan = new TablePilihTindakan();
+        database db = new database();
+        tablePilihTindakan tblcariPilihTindakan = new tablePilihTindakan();
         String katakunci=txtCariPilihTindakan.getText();
         if (katakunci!=null){
             tblcariPilihTindakan.setData(db.cari_PilihTindakan(katakunci));
@@ -1250,8 +1341,8 @@ public class Futama extends javax.swing.JFrame {
     private void btnPilihObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihObatActionPerformed
         // TODO add your handling code here:
         try {
-            Database db = new Database();
-            Session ses = new Session();
+            database db = new database();
+            session ses = new session();
             int baris = tblPilihObat.getSelectedRow();
             String kode_obat = (String)tblPilihObat.getValueAt(baris, 0);
             ses.setKode_obat(kode_obat);
@@ -1273,7 +1364,7 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnSimpanDetailObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanDetailObatActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
+        database db = new database();
         int i = tblDetailObat.getSelectedRow();
         int harga = 0;
         int jumlah;
@@ -1293,7 +1384,7 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnDetailObatHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailObatHapusActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
+        database db = new database();
         int i = tblDetailObat.getSelectedRow();
         String kode_obat = null;
         if (i>-1){
@@ -1305,7 +1396,7 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnPilihTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilihTindakanActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
+        database db = new database();
          int i = tblPilihTindakan.getSelectedRow();
           String kode_tindakan = null;
          if (i>-1){
@@ -1317,7 +1408,7 @@ public class Futama extends javax.swing.JFrame {
 
     private void btnHapusDetailTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusDetailTindakanActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
+        database db = new database();
         int i = tblDetailTindakan.getSelectedRow();
         String kode_tindakan = null;
         if (i>-1){
@@ -1326,6 +1417,32 @@ public class Futama extends javax.swing.JFrame {
         db.hapus_detail_tindakan(kode_tindakan);
         tampildata_detail_tindakan();
     }//GEN-LAST:event_btnHapusDetailTindakanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        database db = new database();
+        session ses = new session();
+        tableObatPembayaran tblObat = new tableObatPembayaran();
+        tablePembayaranTindakan tblTindakan = new tablePembayaranTindakan();
+        String katakunci=txtCariNoresep.getText();
+        if (katakunci!=null){
+            tblObat.setData(db.cari_detail_obat(katakunci));
+            tblObat.fireTableDataChanged();
+            tblPembayaranObat.setModel(tblObat);
+            
+            tblTindakan.setData(db.cari_detail_tindakan(katakunci));
+            tblTindakan.fireTableDataChanged();
+            tblPembayaranTindakan.setModel(tblTindakan);
+            
+            db.tampil_nama_pasien_pembayaran(katakunci);
+            db.tampil_harga_obat_pembayaran(katakunci);
+        }
+        txtPembayaranNoResep.setText(katakunci);
+        txtPembayaranNoPasien.setText(ses.getPembayaran_no_pasien());
+        txtPembayaranNamaPasien.setText(ses.getPembayaran_nama_pasien());
+        txtPembayaranTobat.setText(ses.getTotal_harga_obat());
+        txtSearchCmedik.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1344,21 +1461,23 @@ public class Futama extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Futama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Futama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Futama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Futama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Futama().setVisible(true);
+                new fUtama().setVisible(true);
             }
         });
     }
@@ -1387,8 +1506,11 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpanDetailObat;
     private javax.swing.JButton btnTambahObatTindakan;
     private javax.swing.JButton btnUbahCatatan;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1406,10 +1528,17 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1423,11 +1552,14 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -1453,9 +1585,12 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JTable tblDetailResepObat;
     private javax.swing.JTable tblDetailResepTindakan;
     private javax.swing.JTable tblDetailTindakan;
+    private javax.swing.JTable tblPembayaranObat;
+    private javax.swing.JTable tblPembayaranTindakan;
     private javax.swing.JTable tblPilihObat;
     private javax.swing.JTable tblPilihTindakan;
     private javax.swing.JTextArea txtAreaTambahCatatan;
+    private javax.swing.JTextField txtCariNoresep;
     private javax.swing.JTextField txtCariPilihObat;
     private javax.swing.JTextField txtCariPilihTindakan;
     private javax.swing.JTextField txtDetailObatAturan;
@@ -1464,6 +1599,14 @@ public class Futama extends javax.swing.JFrame {
     private javax.swing.JTextField txtNamaPasien;
     private javax.swing.JTextField txtNoPasien;
     private javax.swing.JTextField txtNoresep;
+    private javax.swing.JTextField txtPembayaranBayar;
+    private javax.swing.JTextField txtPembayaranKembalian;
+    private javax.swing.JTextField txtPembayaranNamaPasien;
+    private javax.swing.JTextField txtPembayaranNoPasien;
+    private javax.swing.JTextField txtPembayaranNoResep;
+    private javax.swing.JTextField txtPembayaranTobat;
+    private javax.swing.JTextField txtPembayaranTpembayaran;
+    private javax.swing.JTextField txtPembayaranTtindakan;
     private javax.swing.JTextField txtSearchCmedik;
     // End of variables declaration//GEN-END:variables
 }

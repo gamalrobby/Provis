@@ -9,13 +9,13 @@ package poliklinik.view;
  *
  * @author Gamal Robby
  */
-class Obat {
+class obat {
     private String kode_obat;
     private String nama_obat;
     private String stok_obat;
     private String harga_obat;
 
-    public Obat(String kode_obat, String nama_obat, String stok_obat, String harga_obat) {
+    public obat(String kode_obat, String nama_obat, String stok_obat, String harga_obat) {
         this.kode_obat = kode_obat;
         this.nama_obat = nama_obat;
         this.stok_obat = stok_obat;
