@@ -14,6 +14,7 @@ public class session {
     private static String nama_pegawai;
     private static String pekerjaan;
     private static String no_resep;
+    private static String no_nota;
     private static String no_pasien;
     private static String kode_catatan;
     private static String catatan;
@@ -24,6 +25,14 @@ public class session {
     private static String pembayaran_no_pasien;
     private static String total_harga_obat;
     private static String total_harga_tindakan;
+
+    public static String getNo_nota() {
+        return no_nota;
+    }
+
+    public static void setNo_nota(String no_nota) {
+        session.no_nota = no_nota;
+    }
 
     public static String getTotal_harga_obat() {
         return total_harga_obat;

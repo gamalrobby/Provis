@@ -172,6 +172,20 @@ public class fUtama extends javax.swing.JFrame {
         ses.setKode_catatan(tampil);
     }
     
+    public void random_no_nota(){
+        session ses = new session();
+        Random angkaRandom = new Random(); 
+        int hasil;
+        char hasil2 = 0;
+        String tampil = "";
+        hasil = 1 + angkaRandom.nextInt(999999);
+        for (int x = 1; x <= 4; x++) {
+             hasil2 = (char) ('A' + Math.random() * ('Z' - 'A' + 1));
+             tampil +=hasil2; 
+        }
+        ses.setNo_nota(tampil+String.valueOf(hasil));
+    }
+    
     public fUtama() {
         initComponents();
         validasilogin();
@@ -261,7 +275,7 @@ public class fUtama extends javax.swing.JFrame {
         pnlPembayaran = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         txtCariNoresep = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCariPembayaran = new javax.swing.JButton();
         txtPembayaranNoResep = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtPembayaranNoPasien = new javax.swing.JTextField();
@@ -282,8 +296,9 @@ public class fUtama extends javax.swing.JFrame {
         txtPembayaranBayar = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         txtPembayaranKembalian = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnBayar = new javax.swing.JButton();
+        btnCetakPembayaran = new javax.swing.JButton();
+        btnRefreshPembayaran = new javax.swing.JButton();
         pnlObat = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         pnlPilihObat = new javax.swing.JPanel();
@@ -762,21 +777,31 @@ public class fUtama extends javax.swing.JFrame {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel8.add(txtCariNoresep, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 175, 28));
 
-        jButton1.setText("Cari");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCariPembayaran.setBackground(new java.awt.Color(13, 206, 112));
+        btnCariPembayaran.setForeground(new java.awt.Color(255, 255, 255));
+        btnCariPembayaran.setText("Cari");
+        btnCariPembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCariPembayaran.setFocusPainted(false);
+        btnCariPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCariPembayaranActionPerformed(evt);
             }
         });
-        jPanel8.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, 30));
+        jPanel8.add(btnCariPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, 30));
+
+        txtPembayaranNoResep.setEditable(false);
         jPanel8.add(txtPembayaranNoResep, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 180, 30));
 
         jLabel22.setText("No Resep");
         jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        txtPembayaranNoPasien.setEditable(false);
         jPanel8.add(txtPembayaranNoPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 180, 30));
 
         jLabel24.setText("No Pasien");
         jPanel8.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        txtPembayaranNamaPasien.setEditable(false);
         jPanel8.add(txtPembayaranNamaPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 180, 30));
 
         jLabel25.setText("Nama Pasien");
@@ -814,11 +839,17 @@ public class fUtama extends javax.swing.JFrame {
 
         jLabel29.setText("Total Harga Obat");
         jPanel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+
+        txtPembayaranTobat.setEditable(false);
         jPanel8.add(txtPembayaranTobat, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 180, 30));
 
         jLabel30.setText("Total Harga Tindakan");
         jPanel8.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
+
+        txtPembayaranTtindakan.setEditable(false);
         jPanel8.add(txtPembayaranTtindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 180, 30));
+
+        txtPembayaranTpembayaran.setEditable(false);
         jPanel8.add(txtPembayaranTpembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 180, 30));
 
         jLabel31.setText("Total Pembayaran");
@@ -830,13 +861,40 @@ public class fUtama extends javax.swing.JFrame {
 
         jLabel33.setText("Kembalian");
         jPanel8.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, -1, -1));
+
+        txtPembayaranKembalian.setEditable(false);
         jPanel8.add(txtPembayaranKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 180, 30));
 
-        jButton2.setText("BAYAR");
-        jPanel8.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 110, 30));
+        btnBayar.setBackground(new java.awt.Color(13, 206, 112));
+        btnBayar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBayar.setText("BAYAR");
+        btnBayar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBayar.setFocusPainted(false);
+        btnBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBayarActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 110, 30));
 
-        jButton3.setText("CETAK");
-        jPanel8.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, 40));
+        btnCetakPembayaran.setBackground(new java.awt.Color(13, 206, 112));
+        btnCetakPembayaran.setForeground(new java.awt.Color(255, 255, 255));
+        btnCetakPembayaran.setText("CETAK");
+        btnCetakPembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCetakPembayaran.setFocusPainted(false);
+        jPanel8.add(btnCetakPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, 40));
+
+        btnRefreshPembayaran.setBackground(new java.awt.Color(13, 206, 112));
+        btnRefreshPembayaran.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshPembayaran.setText("Refresh");
+        btnRefreshPembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefreshPembayaran.setFocusPainted(false);
+        btnRefreshPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshPembayaranActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnRefreshPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, 40));
 
         pnlPembayaran.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 960, 470));
 
@@ -1418,7 +1476,7 @@ public class fUtama extends javax.swing.JFrame {
         tampildata_detail_tindakan();
     }//GEN-LAST:event_btnHapusDetailTindakanActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCariPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPembayaranActionPerformed
         // TODO add your handling code here:
         database db = new database();
         session ses = new session();
@@ -1436,13 +1494,59 @@ public class fUtama extends javax.swing.JFrame {
             
             db.tampil_nama_pasien_pembayaran(katakunci);
             db.tampil_harga_obat_pembayaran(katakunci);
+            db.tampil_harga_tindakan_pembayaran(katakunci);
         }
         txtPembayaranNoResep.setText(katakunci);
         txtPembayaranNoPasien.setText(ses.getPembayaran_no_pasien());
         txtPembayaranNamaPasien.setText(ses.getPembayaran_nama_pasien());
         txtPembayaranTobat.setText(ses.getTotal_harga_obat());
-        txtSearchCmedik.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        txtPembayaranTtindakan.setText(ses.getTotal_harga_tindakan());
+        int obat=Integer.valueOf(txtPembayaranTobat.getText());
+        int tindakan=Integer.valueOf(txtPembayaranTtindakan.getText());
+        int harga=obat+tindakan;
+        txtPembayaranTpembayaran.setText(String.valueOf(harga));
+        txtCariNoresep.setText("");
+    }//GEN-LAST:event_btnCariPembayaranActionPerformed
+
+    private void btnRefreshPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPembayaranActionPerformed
+//         TODO add your handling code here:
+        txtPembayaranBayar.setText("");
+        txtPembayaranKembalian.setText("");
+        txtPembayaranNamaPasien.setText("");
+        txtPembayaranNoPasien.setText("");
+        txtPembayaranNoResep.setText("");
+        txtPembayaranTobat.setText("");
+        txtPembayaranTpembayaran.setText("");
+        txtPembayaranTtindakan.setText("");
+        database db = new database();
+        String katakunci=txtCariNoresep.getText();
+        tableObatPembayaran tblObat = new tableObatPembayaran();
+        tablePembayaranTindakan tblTindakan = new tablePembayaranTindakan();
+        tblObat.setData(db.cari_detail_obat(katakunci));
+        tblObat.fireTableDataChanged();
+        tblPembayaranObat.setModel(tblObat);
+            
+        tblTindakan.setData(db.cari_detail_tindakan(katakunci));
+        tblTindakan.fireTableDataChanged();
+        tblPembayaranTindakan.setModel(tblTindakan);
+    }//GEN-LAST:event_btnRefreshPembayaranActionPerformed
+
+    private void btnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarActionPerformed
+        // TODO add your handling code here:
+        random_no_nota();
+        session ses = new session();
+        database db = new database();
+        int bayar = Integer.valueOf(txtPembayaranBayar.getText());
+        int total = Integer.valueOf(txtPembayaranTpembayaran.getText());
+        int kembalian = bayar-total;
+        txtPembayaranKembalian.setText(String.valueOf(kembalian));
+        db.tambah_pembayaran(ses.getNo_nota(), txtPembayaranNoResep.getText(),
+                Integer.valueOf(txtPembayaranTtindakan.getText()) , 
+                Integer.valueOf(txtPembayaranTobat.getText()), 
+                Integer.valueOf(txtPembayaranTpembayaran.getText()), 
+                Integer.valueOf(txtPembayaranBayar.getText()), 
+                Integer.valueOf(txtPembayaranKembalian.getText()));
+    }//GEN-LAST:event_btnBayarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1485,10 +1589,13 @@ public class fUtama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgDinamic;
     private javax.swing.JButton btnBatalPasien;
+    private javax.swing.JButton btnBayar;
     private javax.swing.JPanel btnCMedik;
+    private javax.swing.JButton btnCariPembayaran;
     private javax.swing.JButton btnCariPilihObat;
     private javax.swing.JButton btnCariPilihTindakan;
     private javax.swing.JButton btnCetak;
+    private javax.swing.JButton btnCetakPembayaran;
     private javax.swing.JButton btnDetailObatHapus;
     private javax.swing.JButton btnHapusDetailTindakan;
     private javax.swing.JPanel btnLogout;
@@ -1500,17 +1607,15 @@ public class fUtama extends javax.swing.JFrame {
     private javax.swing.JButton btnPilihObat;
     private javax.swing.JButton btnPilihPasien;
     private javax.swing.JButton btnPilihTindakan;
+    private javax.swing.JButton btnRefreshPembayaran;
     private javax.swing.JButton btnRefreshPiihObat;
     private javax.swing.JButton btnRefreshPiihTindakan;
     private javax.swing.JButton btnSimpanCatatan;
     private javax.swing.JButton btnSimpanDetailObat;
     private javax.swing.JButton btnTambahObatTindakan;
     private javax.swing.JButton btnUbahCatatan;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

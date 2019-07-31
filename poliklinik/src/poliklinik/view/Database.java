@@ -709,7 +709,6 @@ public class database {
                 listmahasiswa.add(new detailPembayaranObat(rs.getString("detail_obat.no_resep"),rs.getString("detail_obat.kode_obat"),rs.getString("obat.nama_obat")
                         ,rs.getString("detail_obat.jumlah"),rs.getString("obat.harga_obat"),rs.getString("detail_obat.aturan_pakai"),
                         rs.getString("detail_obat.sub_harga_obat")));
-                System.out.println(rs.getString("obat.nama_obat"));
             }
             rs.close();
         } catch (Exception e) {
@@ -814,6 +813,65 @@ public class database {
         {
             try {
                 stat.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    public void tampil_harga_tindakan_pembayaran(String no_resep){
+        Connection conn = null;
+        Statement stat = null;
+        ResultSet rs;
+        config();
+        conn = con;
+        stat = stm;
+        try {
+            session ses = new session();
+            String sql = "SELECT SUM(tindakan.harga_tindakan) AS harga FROM detail_tindakan,tindakan,resep WHERE tindakan.kode_tindakan=detail_tindakan.kode_tindakan AND detail_tindakan.no_resep=resep.no_resep AND resep.no_resep='"+no_resep+"'";
+            rs = stat.executeQuery(sql);
+            if(rs.next()){
+                ses.setTotal_harga_tindakan(rs.getString("harga"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error : "+ e.getMessage());
+        }
+        finally
+        {
+            try {
+                stat.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    public void tambah_pembayaran(String no_nota,String no_resep,int t_tindakan,int t_obat,int t_bayar,int bayar,int kembali)
+        {
+        session ses = new session();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url,user,pass);
+            stmt = conn.createStatement();
+            String sql = "insert into transaksi(no_nota,no_resep,tgl_transaksi,total_harga_tindakan,total_harga_obat,total_pembayaran,pembayaran,kembalian)"
+                    + "values ('"+no_nota+"','"+no_resep+"','"+getTanggal()+"','"+t_tindakan+"',"
+                    + "'"+t_obat+"','"+t_bayar+"','"+bayar+"','"+kembali+"')";
+            stmt.executeUpdate(sql);
+            
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getMessage());
+        }
+        finally
+        {
+            try {
+                stmt.close();
             } catch (Exception e) {
             }
             try {
