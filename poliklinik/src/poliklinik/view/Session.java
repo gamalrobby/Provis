@@ -19,6 +19,16 @@ public class Session {
     private static String catatan;
     private static String kode_obat;
     private static String kode_tindakan;
+    private static String nama_pasien;
+
+    public static String getNama_pasien() {
+        return nama_pasien;
+    }
+
+    public static void setNama_pasien(String nama_pasien) {
+        Session.nama_pasien = nama_pasien;
+    }
+    
 
     public static String getKode_obat() {
         return kode_obat;

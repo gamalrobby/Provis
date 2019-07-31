@@ -81,6 +81,36 @@ public class Database {
         return list;
     }
     
+    public void tampil_nama_pasien(String no_pasien){
+        Connection conn = null;
+        Statement stat = null;
+        ResultSet rs;
+        config();
+        conn = con;
+        stat = stm;
+        try {
+            Session ses = new Session();
+            String sql = "SELECT nama_pasien FROM pasien WHERE no_pasien='"+no_pasien+"'";
+            rs = stat.executeQuery(sql);
+            if(rs.next()){
+                ses.setNama_pasien(rs.getString("nama_pasien"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error : "+ e.getMessage());
+        }
+        finally
+        {
+            try {
+                stat.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
     public ArrayList <Obat> tampil_semua_pilihobat()
     {
         ArrayList<Obat> list = new ArrayList<Obat>();
@@ -229,6 +259,42 @@ public class Database {
         return list;
     }
     
+    public ArrayList <DetailTindakan> tampil_semua_detail_tindakan()
+    {
+        Session ses = new Session();
+        ArrayList<DetailTindakan> list = new ArrayList<DetailTindakan>();
+        Connection conn=null;
+        Statement stmt = null;
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url,user,pass);
+            stmt = conn.createStatement();
+            String sql;
+            sql="select detail_tindakan.kode_tindakan,tindakan.nama_tindakan "
+                    + "from tindakan,detail_tindakan where no_resep = '"+ses.getNo_resep()+"' "
+                    + "AND detail_tindakan.kode_tindakan=tindakan.kode_tindakan";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                list.add(new DetailTindakan(rs.getString("detail_tindakan.kode_tindakan"),rs.getString("tindakan.nama_tindakan")));                
+            }
+            rs.close();
+                    
+        } catch (Exception e) {
+            System.out.println("Error : "+ e.getMessage());
+        }
+        finally
+        {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return list;
+    }
     
     public ArrayList<Catatanmedik> cari_catatanmedik(String katakunci){
         ArrayList<Catatanmedik> listmahasiswa = new ArrayList<Catatanmedik>();
@@ -439,8 +505,37 @@ public class Database {
                 conn.close();
             } catch (Exception e) {
             }
+        }}
+        
+        public void tambah_detail_tindakan(String kode)
+        {
+        Session ses = new Session();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url,user,pass);
+            stmt = conn.createStatement();
+            String sql = "insert into detail_tindakan(no_resep,kode_tindakan) values "
+                    + "('"+ses.getNo_resep()+"','"+kode+"')";
+            stmt.executeUpdate(sql);
+            
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getMessage());
+        }
+        finally
+        {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
         }
     }
+    
 
     public void update_detail_obat(String kode_obat,int jml,String aturan,int sub_harga)
     {
@@ -455,6 +550,58 @@ public class Database {
                     + " where no_resep='"+ses.getNo_resep()+"' AND kode_obat='"+kode_obat+"' ";
             stmt.executeUpdate(sql);
             
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getMessage());
+        }
+        finally
+        {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    public void hapus_detail_obat(String kode_obat){
+        Session ses = new Session();
+        Connection conn=null;
+        Statement stmt=null;
+        try {
+            Class.forName(driver);
+            conn=DriverManager.getConnection(url,user,pass);
+            stmt=conn.createStatement();
+            String sql="delete from detail_obat where no_resep='"+ses.getNo_resep()+"' AND kode_obat='"+kode_obat+"'";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getMessage());
+        }
+        finally
+        {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    public void hapus_detail_tindakan(String kode){
+        Session ses = new Session();
+        Connection conn=null;
+        Statement stmt=null;
+        try {
+            Class.forName(driver);
+            conn=DriverManager.getConnection(url,user,pass);
+            stmt=conn.createStatement();
+            String sql="delete from detail_tindakan where no_resep='"+ses.getNo_resep()+"' AND kode_tindakan='"+kode+"'";
+            stmt.executeUpdate(sql);
         } catch (Exception e) {
             System.out.println("Error : "+e.getMessage());
         }
