@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/Session.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/TablePilihTindakan.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/DetailObat.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/TableDetailObat.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/TablePilihObat.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/Futama.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/Database.java</file>
-            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/login.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/fUtama.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/tableDetailResepObat.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/detailPembayaranObat.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/tablePembayaranTindakan.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/detailPembayaranTindakan.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/tableDetailResepTindakan.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/database.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/session.java</file>
+            <file>file:/D:/Netbeans/poliklinik/src/poliklinik/view/tableObatPembayaran.java</file>
         </group>
     </open-files>
 </project-private>

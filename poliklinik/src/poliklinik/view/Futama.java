@@ -6,11 +6,20 @@
 package poliklinik.view;
 
 import java.awt.Color;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Date;  
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Gamal Robby
@@ -269,7 +278,6 @@ public class fUtama extends javax.swing.JFrame {
         btnSimpanCatatan = new javax.swing.JButton();
         btnUbahCatatan = new javax.swing.JButton();
         pnlPasien = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
         pnlPegawai = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         pnlPembayaran = new javax.swing.JPanel();
@@ -637,6 +645,11 @@ public class fUtama extends javax.swing.JFrame {
         btnCetak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCetak.setEnabled(false);
         btnCetak.setFocusPainted(false);
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         lblNoPasien.setText("NO PASIEN :");
@@ -729,25 +742,7 @@ public class fUtama extends javax.swing.JFrame {
 
         bgDinamic.add(pnlPenanganan, "card3");
 
-        jLabel20.setText("pasien");
-
-        javax.swing.GroupLayout pnlPasienLayout = new javax.swing.GroupLayout(pnlPasien);
-        pnlPasien.setLayout(pnlPasienLayout);
-        pnlPasienLayout.setHorizontalGroup(
-            pnlPasienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPasienLayout.createSequentialGroup()
-                .addGap(321, 321, 321)
-                .addComponent(jLabel20)
-                .addContainerGap(658, Short.MAX_VALUE))
-        );
-        pnlPasienLayout.setVerticalGroup(
-            pnlPasienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPasienLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addComponent(jLabel20)
-                .addContainerGap(314, Short.MAX_VALUE))
-        );
-
+        pnlPasien.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         bgDinamic.add(pnlPasien, "card4");
 
         jLabel21.setText("pegawai");
@@ -882,6 +877,11 @@ public class fUtama extends javax.swing.JFrame {
         btnCetakPembayaran.setText("CETAK");
         btnCetakPembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCetakPembayaran.setFocusPainted(false);
+        btnCetakPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakPembayaranActionPerformed(evt);
+            }
+        });
         jPanel8.add(btnCetakPembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, 40));
 
         btnRefreshPembayaran.setBackground(new java.awt.Color(13, 206, 112));
@@ -1548,6 +1548,53 @@ public class fUtama extends javax.swing.JFrame {
                 Integer.valueOf(txtPembayaranKembalian.getText()));
     }//GEN-LAST:event_btnBayarActionPerformed
 
+    private void btnCetakPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakPembayaranActionPerformed
+        // TODO add your handling code here:
+        session ses = new session();
+        try {
+            //buka koneksi
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection koneksi = DriverManager.getConnection("jdbc:mysql://localhost/dbpoliklinik","root","");
+            //buat parameter
+            HashMap parameter = new HashMap();
+            //tambah perameter
+            parameter.put("no_nota", ses.getNo_nota());
+            File filelaporan = new File ("src/poliklinik/view/struk.jasper");
+            //baca ke jasper
+            JasperReport bacalaporan = (JasperReport)JRLoader.loadObject(filelaporan);
+            //isi ke jasper
+            JasperPrint cetaklaporan = JasperFillManager.fillReport(bacalaporan, parameter, koneksi);
+            //tampilkan laporan
+            JasperViewer.viewReport(cetaklaporan, false);
+            JasperViewer.setDefaultLookAndFeelDecorated(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error Karena : "+ e);
+        }
+    }//GEN-LAST:event_btnCetakPembayaranActionPerformed
+
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+        // TODO add your handling code here:
+        try {
+            //buka koneksi
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection koneksi = DriverManager.getConnection("jdbc:mysql://localhost/dbpoliklinik","root","");
+            //buat parameter
+            HashMap parameter = new HashMap();
+            //tambah perameter
+            parameter.put("no_resep", txtNoresep.getText());
+            File filelaporan = new File ("src/poliklinik/view/resep.jasper");
+            //baca ke jasper
+            JasperReport bacalaporan = (JasperReport)JRLoader.loadObject(filelaporan);
+            //isi ke jasper
+            JasperPrint cetaklaporan = JasperFillManager.fillReport(bacalaporan, parameter, koneksi);
+            //tampilkan laporan
+            JasperViewer.viewReport(cetaklaporan, false);
+            JasperViewer.setDefaultLookAndFeelDecorated(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error Karena : "+ e);
+        }
+    }//GEN-LAST:event_btnCetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1629,7 +1676,6 @@ public class fUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
